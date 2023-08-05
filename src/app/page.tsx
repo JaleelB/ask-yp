@@ -75,7 +75,7 @@ export default function Home() {
           <form className="w-full">
             <div className="w-full relative px-4 py-[10px] max-w-[750px] mx-auto">
               <Textarea
-                className={cn("min-h-[10px] items-center max-h-[200px] resize-none py-[11px]")}
+                className={cn("h-[50px] items-center max-h-[200px] pt-3 resize-none")}
                 placeholder="Type your message here."
               />
               <Button 
