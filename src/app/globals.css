@@ -4,8 +4,8 @@
 
 @layer base {
     :root {
-      --background: 0 0% 100%;
-      --foreground: 0 0% 3.9%;
+      --background: 240 6% 10%;
+      --foreground: 0 0% 98%;
    
       --muted: 0 0% 96.1%;
       --muted-foreground: 0 0% 45.1%;
@@ -68,7 +68,7 @@
     }
 
     body{
-        background: linear-gradient(136deg, #1E1E20 0%, #0E0E11 100%);
+      background: linear-gradient(136deg, #1E1E20 0%, #0E0E11 100%);
     }
   }
    
