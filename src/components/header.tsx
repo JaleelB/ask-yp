@@ -15,7 +15,7 @@ export default function Header() {
                         <path d="M4.38375 11.7989C3.61404 9.76771 5.52261 7.7794 8.47457 7.7794C12.9514 7.7794 13.3568 15.0475 17.6494 15.0475C21.2164 15.0475 23.6083 10.4214 21.9789 7.75523C19.8142 4.2124 16.1946 4.86369 14.6691 6.31489" stroke="white" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.33"/>
                         <path d="M8.47461 7.77907C9.28661 5.04824 13.3575 4.96244 14.9688 6.57376C16.5801 8.18507 16.4937 10.4845 14.2329 13.0033M19.9634 14.347C21.6962 16.4495 25.9556 16.157 26.2631 11.9877C26.5706 7.81834 22.9202 7.8854 22.191 8.16453" stroke="white" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.33"/>
                     </svg>
-                    <span className="text-white font-medium">AskYelp</span>
+                    <span className="text-white font-medium">AskYP</span>
                 </Link>
                 <nav className="inline-flex gap-2">
                     <Link 

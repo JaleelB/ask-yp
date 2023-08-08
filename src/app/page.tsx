@@ -54,8 +54,8 @@ export default function Home() {
                   <path d="M12.698 31.1689C10.4685 25.5656 15.9968 20.0806 24.5473 20.0806C37.5148 20.0806 38.689 40.1306 51.1228 40.1306C61.4548 40.1306 68.383 27.3689 63.6633 20.0139C57.393 10.2406 46.9088 12.0372 42.49 16.0406" stroke="white" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5"/>
                   <path d="M24.5472 20.0809C26.8992 12.5476 38.6907 12.3109 43.358 16.7559C48.0252 21.2009 47.775 27.5443 41.2265 34.4926M57.8252 38.1993C62.8442 43.9993 75.1817 43.1926 76.0725 31.6909C76.9632 20.1893 66.3897 20.3743 64.2775 21.1443" stroke="white" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5"/>
                 </svg>
-                <h1 className="text-4xl sm:text-5xl text-primary font-bold">Ask Yelp</h1>
-                <p className="max-w-[600px] mt-2 text-secondary text-center hidden md:block">AskYelp is an open source AI chatbot that can interact with the Yelp Fusion API with natural language using Open AI functions and the Vercel AI SDK</p>
+                <h1 className="text-4xl sm:text-5xl text-primary font-bold">AskYP</h1>
+                <p className="max-w-[600px] mt-2 text-secondary text-center hidden md:block">AskYP is an open source AI chatbot that can interact with the Yelp Fusion API with natural language using Open AI functions and the Vercel AI SDK</p>
             </div>
             <div className="hidden w-full md:flex flex-col lg:flex-row gap-4 md:gap-0 items-center px-4 md:px-0">
               {
