@@ -6,6 +6,8 @@ import { cn } from "@/lib/utils";
 import * as React from "react";
 import { useChat } from 'ai/react'
 import { User2Icon } from "lucide-react";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 
 const exploreOptions = [
@@ -50,10 +52,10 @@ export default function Home() {
 
   return (
     <>
-      <main className="w-full relative max-w-[1000px] display flex flex-col flex-grow h-full mx-auto flex-1 pb-40">
+      <main className="w-full relative display flex flex-col flex-grow overflow-y-auto mx-auto flex-1 pb-40">
         { messages.length === 0 ?
           (
-            <section className="w-full m-auto lg:m-8 lg:mx-auto 2xl:m-auto">
+            <section className="w-full max-w-[1000px] m-auto lg:m-8 lg:mx-auto 2xl:m-auto">
               <div className="w-full flex flex-col gap-8">
                 <div className="max-w-[650px] mx-auto flex flex-col gap-4 items-center p-4">
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-20 w-24" viewBox="0 0 84 80" fill="none">
@@ -86,34 +88,47 @@ export default function Home() {
             </section>
           ) :
           (
-            <section className="w-full my-8 mx-auto max-w-3xl h-full">
-              <ul className="w-full overflow-y-auto overflow-x-hidden flex flex-col gap-8 px-4">
+            <section className="w-full mt-4 mx-auto max-w-3xl ">
+              <ul className="w-full flex flex-col gap-8 px-4">
                   {messages.map((m, index) => (
-                    <li key={index} className="w-full flex gap-4 sm:gap-6">
-                        <div className="text-primary">
-                          {
-                            m.role === 'user' ? 
-                            (
-                              <div className="border border-primary/[8%] inline-flex items-center rounded-full p-2 sm:p-[11px] bg-primary/[8%]">
-                                <User2Icon className="p-0.5"/>
-                              </div>
-                            ): 
-                            (
-                              <div className="bg-primary inline-flex items-center rounded-full p-2">
-                                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 sm:h-[30px] w-6 sm:w-[30px]" viewBox="0 0 29 30" fill="none">
-                                  <path d="M9.01904 20.3403L10.1651 23.8656C10.1978 23.9661 10.2562 24.0563 10.3346 24.1271C10.413 24.198 10.5086 24.2471 10.6118 24.2694C10.7151 24.2918 10.8224 24.2867 10.9231 24.2547C11.0238 24.2226 11.1143 24.1647 11.1856 24.0867L16.2956 18.5127" stroke="black" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.33"/>
-                                  <path d="M22.8895 15.6269C22.8895 15.6269 22.2491 19.0205 18.4616 19.0205C14.674 19.0205 12.287 14.3467 9.4341 14.3467C6.06406 14.3467 5.17896 17.176 5.17896 19.0205C5.17896 20.595 6.01512 21.2348 7.12196 21.2348C8.22879 21.2348 10.295 19.3649 11.1807 18.4055H16.0745" stroke="black" strokeLinecap="round" strokeLinejoin="round"  strokeWidth="1.33"/>
-                                  <path d="M9.43406 14.347C9.43406 12.7236 8.13027 11.4688 6.08879 11.4688C4.04731 11.4688 2.71875 12.4777 2.71875 15.3306C2.71875 18.1835 5.18556 18.749 5.18556 18.749" stroke="black" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.33"/>
-                                  <path d="M4.38375 11.7989C3.61404 9.76771 5.52261 7.7794 8.47457 7.7794C12.9514 7.7794 13.3568 15.0475 17.6494 15.0475C21.2164 15.0475 23.6083 10.4214 21.9789 7.75523C19.8142 4.2124 16.1946 4.86369 14.6691 6.31489" stroke="black" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.33"/>
-                                  <path d="M8.47461 7.77907C9.28661 5.04824 13.3575 4.96244 14.9688 6.57376C16.5801 8.18507 16.4937 10.4845 14.2329 13.0033M19.9634 14.347C21.6962 16.4495 25.9556 16.157 26.2631 11.9877C26.5706 7.81834 22.9202 7.8854 22.191 8.16453" stroke="black" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.33"/>
-                                </svg>
-                              </div>
-                            )
-                          }
-                        </div>
-                        <div className={`sm:pt-2 ${m.role === 'user' ? "text-primary" : "text-primary/70"}`}>
-                          <p className="break-words">{m.content}</p>
-                        </div>
+                    <li key={index} className="w-full flex gap-4">
+                      <div className="text-primary">
+                        {
+                          m.role === 'user' ? 
+                          (
+                            <div className="border border-primary/[8%] inline-flex items-center rounded-full p-2 sm:p-[11px] bg-primary/[8%]">
+                              <User2Icon className="p-0.5"/>
+                            </div>
+                          ): 
+                          (
+                            <div className="bg-primary inline-flex items-center rounded-full p-2">
+                              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 sm:h-[30px] w-6 sm:w-[30px]" viewBox="0 0 29 30" fill="none">
+                                <path d="M9.01904 20.3403L10.1651 23.8656C10.1978 23.9661 10.2562 24.0563 10.3346 24.1271C10.413 24.198 10.5086 24.2471 10.6118 24.2694C10.7151 24.2918 10.8224 24.2867 10.9231 24.2547C11.0238 24.2226 11.1143 24.1647 11.1856 24.0867L16.2956 18.5127" stroke="black" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.33"/>
+                                <path d="M22.8895 15.6269C22.8895 15.6269 22.2491 19.0205 18.4616 19.0205C14.674 19.0205 12.287 14.3467 9.4341 14.3467C6.06406 14.3467 5.17896 17.176 5.17896 19.0205C5.17896 20.595 6.01512 21.2348 7.12196 21.2348C8.22879 21.2348 10.295 19.3649 11.1807 18.4055H16.0745" stroke="black" strokeLinecap="round" strokeLinejoin="round"  strokeWidth="1.33"/>
+                                <path d="M9.43406 14.347C9.43406 12.7236 8.13027 11.4688 6.08879 11.4688C4.04731 11.4688 2.71875 12.4777 2.71875 15.3306C2.71875 18.1835 5.18556 18.749 5.18556 18.749" stroke="black" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.33"/>
+                                <path d="M4.38375 11.7989C3.61404 9.76771 5.52261 7.7794 8.47457 7.7794C12.9514 7.7794 13.3568 15.0475 17.6494 15.0475C21.2164 15.0475 23.6083 10.4214 21.9789 7.75523C19.8142 4.2124 16.1946 4.86369 14.6691 6.31489" stroke="black" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.33"/>
+                                <path d="M8.47461 7.77907C9.28661 5.04824 13.3575 4.96244 14.9688 6.57376C16.5801 8.18507 16.4937 10.4845 14.2329 13.0033M19.9634 14.347C21.6962 16.4495 25.9556 16.157 26.2631 11.9877C26.5706 7.81834 22.9202 7.8854 22.191 8.16453" stroke="black" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.33"/>
+                              </svg>
+                            </div>
+                          )
+                        }
+                      </div>
+                      <ReactMarkdown
+                        className={`prose mt-1 w-full break-words prose-p:leading-relaxed sm:pt-2 ${m.role === 'user' ? "text-primary" : "text-primary/70"}`}
+                        remarkPlugins={[remarkGfm]}
+                        components={{
+                          a: (props) => (
+                            <a 
+                              {...props} 
+                              target="_blank" 
+                              rel="noopener noreferrer" 
+                              className="text-primary/70"
+                            />
+                          ),
+                        }}
+                      >
+                        {m.content}
+                      </ReactMarkdown>
                     </li>
                   ))}
               </ul>
@@ -121,7 +136,8 @@ export default function Home() {
           )
         }
       </main>
-      <footer className="w-full max-w-3xl fixed backdrop-blur-lg left-1/2 -translate-x-1/2 bottom-0 flex flex-col items-center space-y-2 p-5 pb-3 sm:px-0">
+      <footer className="fixed bottom-0 w-full flex flex-col items-center space-y-2 p-5 pb-3 sm:px-0">
+        <div className="w-full max-w-3xl mx-auto">
           <div className="mx-auto flex w-full max-w-[750px] md:px-6 lg:px-0">
             <div className="flex-grow"></div>
             <PromptDialog
@@ -199,7 +215,8 @@ export default function Home() {
                 </a>
             </p>
           </div>
-        </footer>
+        </div>
+      </footer>
     </>
   );
 }
