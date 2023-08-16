@@ -11,7 +11,11 @@
   "dependencies": {
     "@radix-ui/react-dialog": "^1.0.4",
     "@radix-ui/react-slot": "^1.0.2",
+    "@radix-ui/react-toast": "^1.1.4",
     "@t3-oss/env-nextjs": "^0.3.1",
+    "@upstash/ratelimit": "^0.4.3",
+    "@vercel/analytics": "^1.0.2",
+    "@vercel/kv": "^0.2.2",
     "ai": "^2.1.32",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",

@@ -8,6 +8,9 @@ import { useChat } from 'ai/react'
 import { User2Icon } from "lucide-react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import va from '@vercel/analytics';
+import { useToast } from "@/components/ui/use-toast"
+
 
 
 const exploreOptions = [
@@ -45,14 +48,34 @@ export default function Home() {
 
   const [isDialogOpen, setIsDialogOpen] = React.useState(false);
   const formRef = React.useRef<HTMLFormElement>(null);
+  const { toast } = useToast()
 
-  const { messages, input, handleSubmit, isLoading, setInput } = useChat();
+  const { messages, input, handleSubmit, isLoading, setInput } = useChat({
+    onResponse: (response) => {
+      if (response.status === 429) {
+        toast({
+          title: "Rate limited",
+          description: "You have reached your request limit for the day."
+        });
+        va.track("Rate limited");
+        return;
+      } else {
+        va.track("Chat initiated");
+      }
+    },
+    onError: (error) => {
+      va.track("Chat errored", {
+        input,
+        error: error.message,
+      });
+    },
+  });
   
   const disabled = isLoading || input.length === 0;
 
   return (
     <>
-      <main className="w-full relative display flex flex-col flex-grow overflow-y-auto mx-auto flex-1 pb-40">
+      <main className="w-full relative display flex flex-col flex-grow overflow-y-auto mx-auto flex-1 pb-48 md:pb-40">
         { messages.length === 0 ?
           (
             <section className="w-full max-w-[1000px] m-auto lg:m-8 lg:mx-auto 2xl:m-auto">
@@ -96,13 +119,13 @@ export default function Home() {
                         {
                           m.role === 'user' ? 
                           (
-                            <div className="border border-primary/[8%] inline-flex items-center rounded-full p-2 sm:p-[11px] bg-primary/[8%]">
-                              <User2Icon className="p-0.5"/>
+                            <div className="border border-primary/[8%] inline-flex items-center rounded-full p-2 sm:p-[8px] bg-primary/[8%]">
+                              <User2Icon className="w-6 h-6 p-0.5"/>
                             </div>
                           ): 
                           (
                             <div className="bg-primary inline-flex items-center rounded-full p-2">
-                              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 sm:h-[30px] w-6 sm:w-[30px]" viewBox="0 0 29 30" fill="none">
+                              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 sm:h-[25px] w-6 sm:w-[25px]" viewBox="0 0 29 30" fill="none">
                                 <path d="M9.01904 20.3403L10.1651 23.8656C10.1978 23.9661 10.2562 24.0563 10.3346 24.1271C10.413 24.198 10.5086 24.2471 10.6118 24.2694C10.7151 24.2918 10.8224 24.2867 10.9231 24.2547C11.0238 24.2226 11.1143 24.1647 11.1856 24.0867L16.2956 18.5127" stroke="black" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.33"/>
                                 <path d="M22.8895 15.6269C22.8895 15.6269 22.2491 19.0205 18.4616 19.0205C14.674 19.0205 12.287 14.3467 9.4341 14.3467C6.06406 14.3467 5.17896 17.176 5.17896 19.0205C5.17896 20.595 6.01512 21.2348 7.12196 21.2348C8.22879 21.2348 10.295 19.3649 11.1807 18.4055H16.0745" stroke="black" strokeLinecap="round" strokeLinejoin="round"  strokeWidth="1.33"/>
                                 <path d="M9.43406 14.347C9.43406 12.7236 8.13027 11.4688 6.08879 11.4688C4.04731 11.4688 2.71875 12.4777 2.71875 15.3306C2.71875 18.1835 5.18556 18.749 5.18556 18.749" stroke="black" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.33"/>
@@ -114,7 +137,7 @@ export default function Home() {
                         }
                       </div>
                       <ReactMarkdown
-                        className={`prose mt-1 w-full break-words prose-p:leading-relaxed sm:pt-2 ${m.role === 'user' ? "text-primary" : "text-primary/70"}`}
+                        className={`prose w-full break-words prose-p:leading-relaxed sm:pt-2 ${m.role === 'user' ? "text-primary" : "text-primary/70"}`}
                         remarkPlugins={[remarkGfm]}
                         components={{
                           a: (props) => (
@@ -151,7 +174,7 @@ export default function Home() {
             onSubmit={handleSubmit}
           >
               <Textarea
-                className={cn("h-[50px] bg-neutral-800 items-center max-h-[200px] max pt-3 resize-none")}
+                className={cn("h-[50px] bg-neutral-800 items-center max-h-[200px] max pt-3 resize-none rounded-xl")}
                 placeholder="Type your message here."
                 value={input}
                 autoFocus

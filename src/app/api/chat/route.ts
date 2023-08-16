@@ -10,6 +10,8 @@ import { env } from '@/env.mjs';
 import { functions, runChatFunctions } from '@/app/chat-functions';
 import { type location } from '@/lib/types';
 import { getGeoLocation } from '@/lib/utils';
+import { Ratelimit } from '@upstash/ratelimit';
+import { kv } from '@vercel/kv';
 
  
 const openAIConfig = new Configuration({
@@ -25,6 +27,33 @@ type chatRequest = {
 };
 
 export async function POST(req: Request) {
+
+    if (
+        process.env.NODE_ENV !== "development" &&
+        process.env.KV_REST_API_URL &&
+        process.env.KV_REST_API_TOKEN
+      ) {
+        const ip = req.headers.get("x-forwarded-for");
+        const ratelimit = new Ratelimit({
+          redis: kv,
+          limiter: Ratelimit.slidingWindow(20, "1 d"),
+        });
+    
+        const { success, limit, reset, remaining } = await ratelimit.limit(
+          `askyp_ratelimit_${ip}`,
+        );
+    
+        if (!success) {
+          return new Response("You have reached your request limit for the day.", {
+            status: 429,
+            headers: {
+              "X-RateLimit-Limit": limit.toString(),
+              "X-RateLimit-Remaining": remaining.toString(),
+              "X-RateLimit-Reset": reset.toString(),
+            },
+          });
+        }
+    }
 
     const { messages } = await req.json() as chatRequest;
 
@@ -89,6 +118,5 @@ export async function POST(req: Request) {
         const stream = OpenAIStream(finalResponse);
         return new StreamingTextResponse(stream);
     }
-
-   return null
+    return null;
 }
