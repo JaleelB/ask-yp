@@ -28,19 +28,21 @@ type chatRequest = {
 
 export async function POST(req: Request) {
 
+    const ipAddress = req.headers.get("x-forwarded-for");
+
     if (
         process.env.NODE_ENV !== "development" &&
         process.env.KV_REST_API_URL &&
         process.env.KV_REST_API_TOKEN
       ) {
-        const ip = req.headers.get("x-forwarded-for");
+        
         const ratelimit = new Ratelimit({
           redis: kv,
           limiter: Ratelimit.slidingWindow(20, "1 d"),
         });
     
         const { success, limit, reset, remaining } = await ratelimit.limit(
-          `askyp_ratelimit_${ip}`,
+          `askyp_ratelimit_${ipAddress}`,
         );
     
         if (!success) {
@@ -81,8 +83,6 @@ export async function POST(req: Request) {
             throw new Error("Function name or arguments are missing");
         }
 
-        const ipAddress: string | undefined = (req.headers.get('x-forwarded-for')?.split(',')[0] ?? undefined) ?? undefined;
-
         if (!ipAddress) {
             throw new Error("Cannot determine IP address");
         }
@@ -118,5 +118,26 @@ export async function POST(req: Request) {
         const stream = OpenAIStream(finalResponse);
         return new StreamingTextResponse(stream);
     }
-    return null;
+    else{
+        // If there is no function call available for user request, just return the response
+        const responseContent = initialResponseJson.choices[0]?.message?.content ?? "";
+        const words = responseContent.split(' ');
+
+        // Convert the response to a readable stream
+        const stream = new ReadableStream({
+            async start(controller) {
+                for (const word of words) {
+                    controller.enqueue(new TextEncoder().encode(word + ' ')); // + ' ' to add space after each word
+
+                    // Wait for a random delay between 20ms to 50ms
+                    const delay = Math.random() * (50 - 20) + 20;
+                    await new Promise(resolve => setTimeout(resolve, delay));
+                }
+                controller.close();
+            }
+        });
+
+        return new StreamingTextResponse(stream);
+
+    }
 }
