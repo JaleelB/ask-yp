@@ -106,11 +106,11 @@ export const functions: {
       properties: {
         location: {
           type: "string",
-          description: "The location to search businesses in.",
+          description: "The location to search businesses in. Results should be within 3 miles of this location",
         },
         limit: {
           type: "number",
-          description: "The number of businesses to return. Defaults to 10.",
+          description: "The number of businesses to return. Defaults to 5.",
         },
       },
       required: ["location"],
@@ -124,11 +124,11 @@ export const functions: {
       properties: {
         location: {
           type: "string",
-          description: "The location to search restaurants in.",
+          description: "The location to search restaurants in. Results should be within 3 miles of this location",
         },
         limit: {
           type: "number",
-          description: "The number of restaurants to return. Defaults to 10.",
+          description: "The number of restaurants to return. Defaults to 5.",
         },
       },
       required: ["location"],
@@ -142,11 +142,11 @@ export const functions: {
       properties: {
         location: {
           type: "string",
-          description: "The location to search local services in.",
+          description: "The location to search local services in. Results should be within 3 miles of this location",
         },
         limit: {
           type: "number",
-          description: "The number of local services to return. Defaults to 10.",
+          description: "The number of local services to return. Defaults to 5.",
         },
       },
       required: ["location"],
@@ -160,11 +160,11 @@ export const functions: {
       properties: {
         location: {
           type: "string",
-          description: "The location to search entertainment options in.",
+          description: "The location to search entertainment options in. Results should be within 3 miles of this location",
         },
         limit: {
           type: "number",
-          description: "The number of entertainment options to return. Defaults to 10.",
+          description: "The number of entertainment options to return. Defaults to 5.",
         },
       },
       required: ["location"],
@@ -178,11 +178,11 @@ export const functions: {
       properties: {
         location: {
           type: "string",
-          description: "The location to search health and wellness centers in.",
+          description: "The location to search health and wellness centers in. Results should be within 3 miles of this location",
         },
         limit: {
           type: "number",
-          description: "The number of health and wellness centers to return. Defaults to 10.",
+          description: "The number of health and wellness centers to return. Defaults to 5.",
         },
       },
       required: ["location"],
@@ -196,11 +196,11 @@ export const functions: {
       properties: {
         location: {
           type: "string",
-          description: "The location to search shopping and retail stores in.",
+          description: "The location to search shopping and retail stores in. Results should be within 3 miles of this location",
         },
         limit: {
           type: "number",
-          description: "The number of shopping and retail stores to return. Defaults to 10.",
+          description: "The number of shopping and retail stores to return. Defaults to 5.",
         },
       },
       required: ["location"],
@@ -214,11 +214,11 @@ export const functions: {
       properties: {
         location: {
           type: "string",
-          description: "The location to search events in.",
+          description: "The location to search events in. Results should be within 3 miles of this location",
         },
         limit: {
           type: "number",
-          description: "The number of events to return. Defaults to 10.",
+          description: "The number of events to return. Defaults to 5.",
         },
       },
       required: ["location"],
@@ -232,11 +232,11 @@ export const functions: {
       properties: {
         location: {
           type: "string",
-          description: "The location to search in.",
+          description: "The location to search in. Results should be within 3 miles of this location",
         },
         limit: {
           type: "number",
-          description: "The number of results to return. Defaults to 10.",
+          description: "The number of results to return. Defaults to 5.",
         },
       },
       required: ["location"],
