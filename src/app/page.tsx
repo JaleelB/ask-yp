@@ -5,7 +5,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
 import * as React from "react";
 import { useChat } from 'ai/react'
-import { User2Icon } from "lucide-react";
+import { ArrowDown, User2Icon } from "lucide-react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import va from '@vercel/analytics';
@@ -72,10 +72,14 @@ export default function Home() {
     },
   });
 
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
   // Scroll to the last message whenever messages updates
   React.useEffect(() => {
     if (messagesEndRef.current) {
-      messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+      scrollToBottom();
     }
   }, [messages]);
   
@@ -83,7 +87,7 @@ export default function Home() {
 
   return (
     <>
-      <main className="w-full relative display flex flex-col flex-grow overflow-y-auto mx-auto flex-1 pb-48 md:pb-40">
+      <main className="w-full relative display flex flex-col flex-grow overflow-y-auto mx-auto flex-1 pb-60 md:pb-44">
         { messages.length === 0 ?
           (
             <section className="w-full max-w-[1000px] m-auto lg:m-8 lg:mx-auto 2xl:m-auto">
@@ -169,6 +173,16 @@ export default function Home() {
         }
       </main>
       <footer className="fixed bottom-0 w-full flex flex-col items-center space-y-2 p-5 pb-3 sm:px-0">
+        <div className="w-full flex justify-end sm:pr-6"> 
+          <Button
+            size="sm"
+            className="mt-2 sm:fixed r-4 rounded-full py-1 px-2.5 bg-neutral-800 hover:bg-neutral-700 text-primary border border-primary/[8%] hover:bg-primary/[8%] hover:border-white/25 hover:text-primary"
+            variant="ghost"
+            onClick={scrollToBottom}
+          >
+            <ArrowDown className="w-4 h-4 text-primary"/>
+          </Button>
+        </div>
         <div className="w-full max-w-3xl mx-auto">
           <div className="mx-auto flex w-full max-w-[750px] md:px-6 lg:px-0">
             <div className="flex-grow"></div>
