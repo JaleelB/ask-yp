@@ -29,10 +29,10 @@ const prompts: Prompt[] = [
         "Businesses with Stellar Reviews"
       ],
       prompts: [
-        "Find a variety of businesses located near me",
-        "Search for businesses operating in my vicinity",
-        "Show me businesses near me with the highest ratings",
-        "Provide a list of local businesses in my area",
+        "Explore co-working spaces located close to me",
+        "Search for organic grocery stores operating in my area",
+        "Search for highly rated coffee shops operating in my vicinity",
+        "Locate businesses near me that specialize in eco-friendly products",
         "Locate businesses near me that have received excellent reviews"
       ]
     },
@@ -46,9 +46,9 @@ const prompts: Prompt[] = [
         "Vegetarian/Vegan Friendly Eateries"
       ],
       prompts: [
-        "Discover restaurants and eateries located close to me",
-        "Search for restaurants offering unique dishes in my area",
-        "Show me restaurants near me that are highly recommended by locals",
+        "Provide a list of restaurants and eateries located close to me for a quick bite",
+        "Discover Italian restaurants located close to me",
+        "Show me top culinary restaurants near me that are highly recommended by locals",
         "Provide a list of local restaurants suitable for a family dinner",
         "Locate restaurants near me that offer vegetarian and vegan options"
       ]
@@ -63,11 +63,11 @@ const prompts: Prompt[] = [
         "Trusted Local Services"
       ],
       prompts: [
-        "Find local services that can assist with my needs",
-        "Search for service providers operating in my vicinity",
-        "Show me local services that come highly recommended",
-        "Provide a directory of services available in my area",
-        "Locate local services near me with a track record of reliability"
+        "Find home cleaning services that use green products",
+        "Search for dog walkers operating in my vicinity",
+        "Provide a list of landscapers available in my area",
+        "Locate electricians near me with top-notch service ratings",
+        "Provide a directory of well rated services available in my area",
       ]
     },
     {
@@ -76,15 +76,13 @@ const prompts: Prompt[] = [
         "Entertainment Hotspots",
         "Nightlife Adventures",
         "Top Bars and Clubs",
-        "Local Entertainment Guide",
-        "Upcoming Local Events"
+        "Local Entertainment Guide"
       ],
       prompts: [
         "Discover entertainment options for a fun-filled evening near me",
         "Search for nightlife spots to enjoy with friends in my area",
         "Show me bars and clubs near me that are popular on weekends",
         "Provide a guide to local entertainment and cultural events",
-        "Locate events, concerts, or shows happening near me this week"
       ]
     },
     {
@@ -118,7 +116,6 @@ const prompts: Prompt[] = [
         "Search for retail stores in my area offering seasonal discounts",
         "Show me clothing stores near me that offer both casual and formal wear",
         "Find local artisanal shops or boutiques with unique products",
-        "Locate bookstores near me with a cozy reading space"
       ]
     }
 ]
@@ -163,7 +160,7 @@ export default function PromptDialog({
                         {
                             prompts.map((prompt, index) => (
                                 <div 
-                                    className={cn(`p-3 items-center justify-start font-normal text-base text-primary-foreground hover:bg-primary/[8%] hover:text-primary cursor-pointer ${prompt.category === selectedPromptCategory && "bg-primary/[8%] text-primary"}`)}
+                                    className={cn(`p-3 items-center rounded-md justify-start font-normal text-base text-primary-foreground hover:bg-primary/[8%] hover:text-primary cursor-pointer ${prompt.category === selectedPromptCategory && "bg-primary/[8%] text-primary"}`)}
                                     key={index * Math.random()}
                                     onClick={() => setSelectedPromptCategory(prompt.category)}
                                 >
@@ -179,7 +176,7 @@ export default function PromptDialog({
                                 (
                                     prompt.titles.map((title, index) => (
                                         <div 
-                                            className={cn(`p-3 items-center justify-start font-normal text-base text-primary-foreground hover:bg-primary/[5%] hover:text-primary cursor-pointer ${index === selectedPromptIndex && "bg-primary/[8%] text-primary"}`)}
+                                            className={cn(`p-3 items-center rounded-md jjustify-start font-normal text-base text-primary-foreground hover:bg-primary/[5%] hover:text-primary cursor-pointer ${index === selectedPromptIndex && "bg-primary/[8%] text-primary"}`)}
                                             key={index * Math.random()}
                                             onClick={() => setSelectedPromptIndex(index)}
                                         >
@@ -194,14 +191,6 @@ export default function PromptDialog({
                         <div className="relative h-full w-full overflow-y-scroll whitespace-pre-wrap rounded-md bg-primary/[5%] p-3 text-primary-foreground">
                             <span className="sticky top-0 z-50 flex w-full bg-grey-100 pb-2 text-xs text-grey-400">PREVIEW (WORKSPACE PROMPT)</span>
                             <div className="mt-4">
-                                {/* {
-                                    prompts.map((prompt, index) => (
-                                        selectedPromptCategory === prompt.category &&
-                                        (
-                                            <span key={index * Math.random()}>{prompt.prompts[selectedPromptIndex]}</span>
-                                        )
-                                    ))
-                                } */}
                               {selectedPrompt}
                             </div>
                         </div>
