@@ -24,8 +24,8 @@ const exploreOptions = [
     ),
   },
   {
-    title: "Events and Entertainment",
-    description: "Discover the best events, and entertainment in your area.",
+    title: "Entertainment",
+    description: "Discover the best entertainment spots in your area.",
     icon: (
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="26" viewBox="0 0 24 26" fill="none">
         <path d="M22 2H18V0H16V2H8V0H6V2H2C0.9 2 0 2.9 0 4V24C0 25.1 0.9 26 2 26H22C23.1 26 24 25.1 24 24V4C24 2.9 23.1 2 22 2ZM22 24H2V10H22V24ZM22 8H2V4H6V6H8V4H16V6H18V4H22V8Z" fill="white"/>
@@ -33,11 +33,11 @@ const exploreOptions = [
     )
   },
   {
-    title: "Health and Wellness Services",
-    description: "Find the best health and wellness services in your area.",
+    title: "General Explorations",
+    description: "Dive into diverse attractions and places of interest in your area.",
     icon: (
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 22 22" fill="none">
-        <path d="M15 2C15 1.73478 14.8946 1.48043 14.7071 1.29289C14.5196 1.10536 14.2652 1 14 1H8C7.73478 1 7.48043 1.10536 7.29289 1.29289C7.10536 1.48043 7 1.73478 7 2V7H2C1.73478 7 1.48043 7.10536 1.29289 7.29289C1.10536 7.48043 1 7.73478 1 8V14C1 14.2652 1.10536 14.5196 1.29289 14.7071C1.48043 14.8946 1.73478 15 2 15H7V20C7 20.2652 7.10536 20.5196 7.29289 20.7071C7.48043 20.8946 7.73478 21 8 21H14C14.2652 21 14.5196 20.8946 14.7071 20.7071C14.8946 20.5196 15 20.2652 15 20V15H20C20.2652 15 20.5196 14.8946 20.7071 14.7071C20.8946 14.5196 21 14.2652 21 14V8C21 7.73478 20.8946 7.48043 20.7071 7.29289C20.5196 7.10536 20.2652 7 20 7H15V2Z" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+        <path d="M11 1L21 21L1 21L11 1Z" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
       </svg>
     )
   }
