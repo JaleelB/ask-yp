@@ -26,6 +26,7 @@ type chatRequest = {
     messages: ChatCompletionRequestMessage[];
 };
 
+
 export async function POST(req: Request) {
 
     const ipAddress = req.headers.get("x-forwarded-for");

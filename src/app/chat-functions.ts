@@ -8,7 +8,6 @@ type functionNames =
   | "fetch_entertainment"
   | "fetch_health_wellness"
   | "fetch_shopping_retail"
-  | "fetch_events"
   | "fetch_miscellaneous";
 
 type YelpConfigParams = {
@@ -51,47 +50,7 @@ type BusinessResult = {
     }[];
 };
   
-type EventsResult = {
-    events: {
-      attending_count: number;
-      category: string;
-      cost: number | null;
-      cost_max: number | null;
-      description: string;
-      event_site_url: string;
-      id: string;
-      image_url: string;
-      interested_count: number;
-      is_canceled: boolean;
-      is_free: boolean;
-      is_official: boolean;
-      latitude: number;
-      longitude: number;
-      name: string;
-      tickets_url: string | null;
-      time_end: string | null;
-      time_start: string;
-      location: {
-        address1: string | null;
-        address2: string | null;
-        address3: string | null;
-        city: string;
-        zip_code: string;
-        country: string;
-        state: string;
-        display_address: string[];
-      };
-      event_categories: {
-        alias: string;
-        title: string;
-      }[];
-    }[];
-    total: number;
-  };
-  
-  
-type YelpResponse = BusinessResult | EventsResult;
-  
+type YelpResponse = BusinessResult;
 
 export const functions: {
   name: functionNames;
@@ -207,24 +166,6 @@ export const functions: {
     },
   },
   {
-    name: "fetch_events",
-    description: "Get a list of events based on location.",
-    parameters: {
-      type: "object",
-      properties: {
-        location: {
-          type: "string",
-          description: "The location to search events in. Results should be within 3 miles of this location",
-        },
-        limit: {
-          type: "number",
-          description: "The number of events to return. Defaults to 5.",
-        },
-      },
-      required: ["location"],
-    },
-  },
-  {
     name: "fetch_miscellaneous",
     description: "Generic search function for queries that don't fit other categories.",
     parameters: {
@@ -246,7 +187,6 @@ export const functions: {
 
 
 const YELP_BUSINESS_ENDPOINT = `${env.YELP_API_ENDPOINT}/businesses/search`;
-const YELP_EVENTS_ENDPOINT = `${env.YELP_API_ENDPOINT}/events`; 
 
 const fetchWithYelpConfig = async (endpoint: string, params: YelpConfigParams) => {
 
@@ -294,9 +234,6 @@ export const fetch_health_wellness = async (latitude:number, longitude:number, l
 export const fetch_shopping_retail = async (latitude:number, longitude:number, limit = 5) => 
   fetchWithYelpConfig(YELP_BUSINESS_ENDPOINT, { latitude, longitude, limit, categories: 'shopping' });
 
-export const fetch_events = async (latitude:number, longitude:number, limit = 5) => 
-  fetchWithYelpConfig(YELP_EVENTS_ENDPOINT, { latitude, longitude, limit });
-
 export const fetch_miscellaneous = async (latitude:number, longitude:number, limit = 5) => 
   fetchWithYelpConfig(YELP_BUSINESS_ENDPOINT, { latitude, longitude, limit });
 
@@ -305,7 +242,7 @@ export const runChatFunctions = async (
     functionName: string, 
     params: { 
         latitude: number,  
-        longitude: number
+        longitude: number,
     }
 ) => {
 
@@ -332,8 +269,6 @@ export const runChatFunctions = async (
             return await fetch_health_wellness(latitude, longitude);
         case 'fetch_shopping_retail':
             return await fetch_shopping_retail(latitude, longitude);
-        case 'fetch_events':
-            return await fetch_events(latitude, longitude);
         case 'fetch_miscellaneous':
             return await fetch_miscellaneous(latitude, longitude);
         default:
