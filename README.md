@@ -1,28 +1,73 @@
-# Create T3 App
+<a href="https://askyp.vercel.app/">
+  <img alt="Chat with Yelp using natural language." src="./public/web-shot.png">
+  <h1 align="center">AskYP</h1>
+</a>
 
-This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
+<p align="center">
+  Chat with Yelp using natural language. Built with OpenAI Functions, Vercel AI SDK and the Yelp Fusion API. 
+</p>
 
-## What's next? How do I make an app with this?
+<p align="center">
+  <a href="https://github.com/JaleelB/ask-yp/blob/main/LICENSE">
+    <img src="https://img.shields.io/github/license/JaleelB/ask-yp?label=license&logo=github&color=f80&logoColor=fff" alt="License" />
+  </a>
+  <a href="https://github.com/JaleelB/ask-yp"><img src="https://img.shields.io/github/stars/JaleelB/ask-yp?style=social" alt="AskYP's GitHub repo"></a>
+</p>
 
-We try to keep this project as simple as possible, so you can start with just the scaffolding we set up for you, and add additional things later when they become necessary.
+<p align="center">
+  <a href="#introduction"><strong>Introduction</strong></a> ·
+  <a href="#setting-up-locally"><strong>Setting Up Locally</strong></a> ·
+  <a href="#tech-stack"><strong>Tech Stack</strong></a> ·
+  <a href="#contributing"><strong>Contributing</strong></a> ·
+  <a href="#license"><strong>License</strong></a>
+</p>
+<br/>
 
-If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
+## Introduction
 
-- [Next.js](https://nextjs.org)
-- [NextAuth.js](https://next-auth.js.org)
-- [Prisma](https://prisma.io)
-- [Tailwind CSS](https://tailwindcss.com)
-- [tRPC](https://trpc.io)
+AskYP is an open-source AI chatbot that uses [OpenAI Functions](https://platform.openai.com/docs/guides/gpt/function-calling) and the [Vercel AI SDK](https://sdk.vercel.ai/docs) to interact with the [Yelp Fusion API](https://docs.developer.yelp.com/docs/getting-started) with natural language.
 
-## Learn More
 
-To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the following resources:
+https://github.com/JaleelB/ask-yp/assets/78449846/3ddcb9c1-695b-426a-a80b-dad46630622b
 
-- [Documentation](https://create.t3.gg/)
-- [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available) — Check out these awesome tutorials
 
-You can check out the [create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) — your feedback and contributions are welcome!
+## Setting Up Locally
 
-## How do I deploy this?
+To set up AskYP locally, you'll need to clone the repository and set up the following environment variables:
 
-Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
+- `OPENAI_API_KEY` – your OpenAI API key (you can get one [here](https://platform.openai.com/account/api-keys))
+- `IPINFO_TOKEN` - your IPInfo API key (you can get one [here](https://ipinfo.io/account/token))
+- `YELP_CLIENT_ID` - your Yelp Fusion API client ID (you can get one [here](https://www.yelp.com/developers/v3/manage_app))
+- `YELP_API_KEY` - your Yelp Fusion API key (you can get one [here](https://www.yelp.com/developers/v3/manage_app))
+- `KV_URL` - your Vercel KV URL (you can get one [here](https://vercel.com/docs/storage/vercel-kv/quickstart))
+- `KV_REST_API_URL` - your Vercel KV API URL (you can get one [here](https://vercel.com/docs/storage/vercel-kv/quickstart))
+- `KV_REST_API_TOKEN` - your Vercel KV REST API URL (you can get one [here](https://vercel.com/docs/storage/vercel-kv/quickstart))
+- `KV_REST_API_READ_ONLY_TOKEN` - your Vercel KV READ-ONLY REST API URL (you can get one [here](https://vercel.com/docs/storage/vercel-kv/quickstart))
+
+## Tech Stack
+
+AskYP is built on the following stack:
+
+- [Next.js](https://nextjs.org/) – framework
+- [OpenAI Functions](https://platform.openai.com/docs/guides/gpt/function-calling) - AI completions
+- [Vercel AI SDK](https://sdk.vercel.ai/docs) – AI streaming library
+- [Yelp Fusion API](https://docs.developer.yelp.com/docs/getting-started) – API
+- [IPInfo](https://ipinfo.io/) – IP geolocation
+- [Vercel KV](https://vercel.com/docs/storage/vercel-kv/quickstart) – database
+- [Vercel](https://vercel.com) – deployments
+- [TailwindCSS](https://tailwindcss.com/) – styles
+
+## Contributing
+
+Here's how you can contribute:
+
+- [Open an issue](https://github.com/JaleelB/ask-yp/issues) if you believe you've encountered a bug.
+- Make a [pull request](https://github.com/JaleelB/ask-yp/pulls) to add new features/make quality-of-life improvements/fix bugs.
+
+## Author
+
+- Jaleel Bennett ([@jal_eelll](https://twitter.com/jal_eelll))
+
+## License
+
+Licensed under the [MIT license](https://github.com/JaleelB/ask-yp/blob/main/LICENSE.md).
