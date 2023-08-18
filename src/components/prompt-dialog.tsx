@@ -150,7 +150,7 @@ export default function PromptDialog({
                     Browse Prompts
                 </Button>
             </DialogTrigger>
-            <DialogContent className={cn("max-w-[1000px] flex flex-col h-screen md:h-auto")}>
+            <DialogContent className={cn("max-w-[1000px] flex flex-col min-h-screen md:h-auto")}>
                 <DialogHeader>
                     <DialogTitle>Example Prompts</DialogTitle>
                     <DialogDescription>Select from these prompts to quickly get started.</DialogDescription>
