@@ -3,6 +3,7 @@ import "./globals.css";
 import { Inter } from "next/font/google";
 import { Toaster } from "@/components/ui/toaster"
 import { siteConfig } from "@/lib/site-config";
+import { Analytics } from '@vercel/analytics/react';
 
 
 const inter = Inter({ subsets: ["latin"] });
@@ -77,6 +78,7 @@ export default function RootLayout({
           <Header/>
           {children}
           <Toaster />
+          <Analytics />
         </div>
       </body>
     </html>
